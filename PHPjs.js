@@ -2238,12 +2238,36 @@
  *									*
  *			当前的运行环境			*
  *									*
- -----------------------------------*/
+ ----------------------------------*/
 	//返回当前运行的欢迎
 	PHP.$_ENV = function(){
 		var env = window.navigator;
 		return env;
 	};
+
+
+    //$_GET全局变量
+    //PHP.$_GET;
+    (function(){
+        var result = {};
+        var url = window.location.search;
+        var len = url.length;
+        console.log(url);
+        if(url != ''){
+            url = url.substr(1,len-1);
+            var urls = url.split('&');
+            for(var i in urls){
+                var tmp_i = urls[i];
+                var tmp_is = tmp_i.split('=');
+                if(tmp_is.length == 2){
+                    result[tmp_is[0]] = tmp_is[1];
+                }
+            }
+        }
+        PHP.$_GET = result;
+    })();
+    
+
 
 	//查看浏览器上的插件
 	PHP.$_Plugin = function(){
