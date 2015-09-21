@@ -1,0 +1,14 @@
+<script>
+//在微信中遇到的返回键时,页面缓存bug
+function isReloadPage(){
+	var url = 'rp_' + location.href;
+	var aj = window.localStorage.getItem(url);
+	if(aj){
+		window.localStorage.removeItem(url);
+		location.reload();
+	}else{
+		window.localStorage.setItem(url, 'value');
+	}
+}
+isReloadPage();
+</script>
